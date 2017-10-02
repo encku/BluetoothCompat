@@ -35,36 +35,36 @@ import java.util.List;
 
 public class BluetoothLeScannerCompat {
 
+    private final BluetoothLeScannerCompatImpl implementation;
+
     private static final String TAG = "BTLeScannerCompat";
 
-    public static void flushPendingScanResults(@NonNull BluetoothAdapter adapter, @NonNull ScanCallbackCompat callbackCompat) {
-        IMPL.flushPendingScanResults(adapter, callbackCompat);
+    public void flushPendingScanResults(@NonNull BluetoothAdapter adapter, @NonNull ScanCallbackCompat callbackCompat) {
+        implementation.flushPendingScanResults(adapter, callbackCompat);
     }
 
     @RequiresPermission("android.permission.BLUETOOTH_ADMIN")
-    public static void startScan(@NonNull BluetoothAdapter adapter, @Nullable List<ScanFilterCompat> filters, @NonNull ScanSettingsCompat settings, @NonNull ScanCallbackCompat callbackCompat) {
-        IMPL.startScan(adapter, filters, settings, callbackCompat);
+    public void startScan(@NonNull BluetoothAdapter adapter, @Nullable List<ScanFilterCompat> filters, @NonNull ScanSettingsCompat settings, @NonNull ScanCallbackCompat callbackCompat) {
+        implementation.startScan(adapter, filters, settings, callbackCompat);
     }
 
     @RequiresPermission("android.permission.BLUETOOTH_ADMIN")
-    public static void startScan(@NonNull BluetoothAdapter adapter, @NonNull ScanCallbackCompat callbackCompat) {
-        IMPL.startScan(adapter, callbackCompat);
+    public void startScan(@NonNull BluetoothAdapter adapter, @NonNull ScanCallbackCompat callbackCompat) {
+        implementation.startScan(adapter, callbackCompat);
     }
 
     @RequiresPermission("android.permission.BLUETOOTH_ADMIN")
-    public static void stopScan(@NonNull BluetoothAdapter adapter, @NonNull ScanCallbackCompat callbackCompat) {
-        IMPL.stopScan(adapter, callbackCompat);
+    public void stopScan(@NonNull BluetoothAdapter adapter, @NonNull ScanCallbackCompat callbackCompat) {
+        implementation.stopScan(adapter, callbackCompat);
     }
 
-    static final BluetoothLeScannerCompatImpl IMPL;
-
-    static {
+    public BluetoothLeScannerCompat() {
         final int version = Build.VERSION.SDK_INT;
         if (version >= Build.VERSION_CODES.LOLLIPOP) {
-            IMPL = new API21BluetoothLeScannerCompatImpl();
+            implementation = new API21BluetoothLeScannerCompatImpl();
         }
         else {
-            IMPL = new API18BluetoothLeScannerCompatImpl();
+            implementation = new API18BluetoothLeScannerCompatImpl();
         }
     }
 

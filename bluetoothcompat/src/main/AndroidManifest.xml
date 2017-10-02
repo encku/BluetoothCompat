@@ -1,6 +1,7 @@
 <manifest
     package="com.forkingcode.bluetoothcompat">
 
+    <uses-permission name="android.permission.BLUETOOTH_ADMIN" />
     <application/>
 
 </manifest>
