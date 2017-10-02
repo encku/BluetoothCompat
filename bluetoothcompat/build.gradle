@@ -27,7 +27,7 @@ dependencies {
 ext {
     libraryName = 'bluetoothcompat'
     libraryDescription = 'Compatibility library back-porting the Android 5.0 Bluetooth LE Scanner api concepts to API 18+.'
-    libraryVersion = project.libraryVersion
+    libraryVersion = 1.1
     bintrayDryRun = isDryRun()
 }
 
